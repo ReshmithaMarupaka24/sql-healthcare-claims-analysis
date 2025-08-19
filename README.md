@@ -32,35 +32,39 @@ It includes a schema, seed data, constraints, indexes, and analysis queries that
 
 ## 🏁 Quickstart (psql)
 
-```bash
-# 0) create the database (if not already created)
-createdb healthcare
+**0) create the database (if not already created)**
 
-# 1) run the schema
+  createdb healthcare
+
+**1) run the schema**
+
 psql -U youruser -d healthcare -f 01_schema.sql
 
-# 2) load the seed data
+**2) load the seed data**
+   
 psql -U youruser -d healthcare -f 02_seed.sql
 
-# 3) insert claims
+**3) insert claims**
+   
 psql -U youruser -d healthcare -f 03_claims_insert.sql
 
-# 4) apply indexes & views
+**4) apply indexes & views**
+   
 psql -U youruser -d healthcare -f 04_indexes.sql
 psql -U youruser -d healthcare -f 05_views.sql
 
-# 5) run sanity checks
+**5) run sanity checks**
+    
 psql -U youruser -d healthcare -f 06_sanity.sql
 
-# 6) run analysis queries
+**6) run analysis queries**
+    
 psql -U youruser -d healthcare -f 07_analysis.sql
 
-
 ---
 
----
+## 📊 Results
 
-## Results
 Here are some example insights generated from the analysis queries:
 
 ### 1. Monthly Cost Trend
