@@ -4,6 +4,17 @@ This project demonstrates a **SQL-only portfolio project** using PostgreSQL focu
 It includes a schema, seed data, constraints, indexes, and analysis queries that answer real business questions.
 
 ---
+## Table of Contents
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Setup Instructions](#setup-instructions)
+- [Results](#results)
+  - [Monthly Cost Trend](#monthly-cost-trend)
+  - [Top Diagnoses by Total Allowed](#top-diagnoses-by-total-allowed)
+- [Skills Demonstrated](#skills-demonstrated)
+- [Author](#author)
+
+---
 
 ## Features
 
@@ -103,3 +114,54 @@ Here are some example insights generated from the analysis queries:
 | Medicare    | 517.42   |
 
 ---
+
+### Monthly Cost Trend
+![MonthlyCost Trend](screenshots/Montlycost_trend.png)
+
+**What it is:** A month-over-month line of **total billed dollars** across all claims.  
+**How it’s calculated:** `SUM(billed_amount)` grouped by `date_trunc('month', service_start_date)`.  
+**Why it matters:** It shows seasonality and spikes. If a month jumps, you can drill into claim_type (inpatient vs outpatient), plan, or provider to find the driver.  
+**How to read it:**
+- Steady climb → higher utilization and/or unit costs.
+- Sudden spike → one-off high-cost episodes or batching of large claims.
+- A sharp dip in the final month often just means **partial month** data.  
+**Tip:** If you plot **Allowed** and **Paid** as additional lines, the gap to **Billed** shows discounting and payment friction.
+
+---
+
+### Top Diagnoses by Total Allowed
+![Top Diagnoses](screenshots/top_diagnoses.png)
+
+**What it is:** A ranked bar chart of diagnoses with the **highest total allowed spend**.  
+**How it’s calculated:** Join claims to the primary diagnosis (`dx_rank = 1`) and sum `allowed_amount` by `dx_code/description`, then take the top 10.  
+**Why it matters:** These conditions are your biggest cost drivers. They’re the best targets for care management programs, prior auth, or guideline adherence work.  
+**How to read it:**
+- Bars at the top = the largest share of total allowed dollars.
+- Chronic conditions (e.g., diabetes, hypertension) typically dominate; that’s normal in commercial and Medicare books.
+- If one diagnosis is far ahead, investigate variation by provider, plan, or geography.  
+**Caveats:** This repo uses **synthetic** data. In a real dataset, ensure diagnosis assignment is complete and not biased (we attach a primary dx to every claim before running this).
+  
+---
+
+
+## 🧠 Skills Demonstrated
+
+- **Data modeling (PostgreSQL):** normalized schema for members, plans, providers, claims, dx/px codes; strong constraints (FKs, CHECKs, date logic).
+- **Realistic seeding:** `generate_series()`, `random()`, LATERAL subqueries, deterministic hashing to avoid skew (e.g., provider/diagnosis distribution).
+- **Cost mechanics:** correct relationship between **billed / allowed / paid** and member cost share (**deductible, copay, coinsurance**) with guard-rails.
+- **Analytical SQL:** CTEs, window functions (`row_number`, `lead`), month bucketing with `date_trunc`, group-by rollups.
+- **Performance tuning:** targeted indexes, a materialized view for provider performance, and a refresh helper.
+- **Data quality checks:** sanity queries for date rules, non-negatives, and sum reconciliation.
+- **Reproducible exports:** `psql --csv` one-liners and `COPY TO STDOUT` for clean CSV generation.
+- **Visualization pipeline (optional):** pandas + Matplotlib to turn SQL outputs into repo-ready PNGs.
+- **Domain understanding:** claims lifecycle, claim types (inpatient/outpatient/professional/pharmacy), place of service, denials, readmissions, PMPM.
+- **Project hygiene:** clear file layout, documented run order, and readable README with results and screenshots.
+
+---
+
+## 👤 Author
+
+**Reshmitha Marupaka**  
+- GitHub: [ReshmithaMarupaka24](https://github.com/ReshmithaMarupaka24)  
+- LinkedIn: https://www.linkedin.com/in/reshmitham/
+
