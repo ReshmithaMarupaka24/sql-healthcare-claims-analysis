@@ -73,7 +73,7 @@ psql -U youruser -d healthcare -f 06_sanity.sql
 psql -U youruser -d healthcare -f 07_analysis.sql
 
 ---
-
+<a id="results"></a>
 ## 📊 Results
 
 Here are some example insights generated from the analysis queries:
@@ -143,7 +143,7 @@ Here are some example insights generated from the analysis queries:
   
 ---
 
-
+<a id="skills-demonstrated"></a>
 ## 🧠 Skills Demonstrated
 
 - **Data modeling (PostgreSQL):** normalized schema for members, plans, providers, claims, dx/px codes; strong constraints (FKs, CHECKs, date logic).
@@ -158,7 +158,7 @@ Here are some example insights generated from the analysis queries:
 - **Project hygiene:** clear file layout, documented run order, and readable README with results and screenshots.
 
 ---
-
+<a id="author"></a>
 ## 👤 Author
 
 **Reshmitha Marupaka**  
