@@ -9,8 +9,8 @@ It includes a schema, seed data, constraints, indexes, and analysis queries that
 - [Project Structure](#project-structure)
 - [Setup Instructions](#setup-instructions)
 - [Results](#results)
-  - [Monthly Cost Trend](#monthly-cost-trend)
-  - [Top Diagnoses by Total Allowed](#top-diagnoses-by-total-allowed)
+- [Monthly Cost Trend](#monthly-cost-trend)
+- [Top Diagnoses by Total Allowed](#top-diagnoses-by-total-allowed)
 - [Skills Demonstrated](#skills-demonstrated)
 - [Author](#author)
 
